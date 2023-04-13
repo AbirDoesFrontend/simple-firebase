@@ -1,0 +1,20 @@
+.login {
+    text-align: center;
+}
+
+.google-btn {
+    background-color: white;
+    border: 1px solid blueviolet;
+    padding: 20px 40px;
+    border-radius: 8px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.user {
+    text-align: center;
+}
+
+.user h2 {
+    margin: 20px 0;
+}
