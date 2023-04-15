@@ -2,13 +2,14 @@
     text-align: center;
 }
 
-.google-btn {
+.btn {
     background-color: white;
     border: 1px solid blueviolet;
     padding: 20px 40px;
     border-radius: 8px;
     margin-top: 10px;
     cursor: pointer;
+    margin-right: 10px;
 }
 
 .user {

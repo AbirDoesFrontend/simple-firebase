@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Login.css";
 
 import {
+  GithubAuthProvider,
   GoogleAuthProvider,
   getAuth,
   signInWithPopup,
@@ -12,18 +13,28 @@ import app from "../../firebase/firebase.init";
 const Login = () => {
   const [user, setUser] = useState(null);
   const auth = getAuth(app);
-  const provider = new GoogleAuthProvider();
+  const googleProvider = new GoogleAuthProvider();
+  const githubProvider = new GithubAuthProvider();
 
-  const authHandler = () => {
-    signInWithPopup(auth, provider)
+  const googleAuthHandler = () => {
+    signInWithPopup(auth, googleProvider)
       .then((result) => {
-        const loggedInUser = result.user;
-        setUser(loggedInUser);
+        const googleUser = result.user;
+        setUser(googleUser);
       })
       .catch((error) => {
         console.log("error", error.message);
       });
   };
+
+  const githubAuthHandler = () => {
+    signInWithPopup(auth , githubProvider)
+      .then((result) => {
+        const githubUser = result.user;
+        console.log(githubUser)
+        setUser(githubUser)
+      })
+  }
 
   const authSignOut = () => {
     signOut(auth)
@@ -36,19 +47,24 @@ const Login = () => {
   return (
     <div className="login">
       {user ? (
-        <button className="google-btn" onClick={authSignOut}>
+        <button className="btn" onClick={authSignOut}>
           Log Out
         </button>
       ) : (
-        <button className="google-btn" onClick={authHandler}>
-          Google Log In
-        </button>
+        <>
+          <button className="btn" onClick={googleAuthHandler}>
+            Google Log In
+          </button>
+          <button className="btn" onClick={githubAuthHandler}>
+            Github Log In
+          </button>
+        </>
       )}
       {user && (
         <div className="user">
           <h2>{user.displayName}</h2>
           <h2>{user.email}</h2>
-          <img src={user.photoURL} alt="" />
+          <img src={user.photoURL} />
         </div>
       )}
     </div>
